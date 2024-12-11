@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('users', UserController::class);
-Route::resource('educational-experience', EducationalExperienceController::class);
-Route::resource('groups', GroupController::class);
+Route::resource('educational-experiences', EducationalExperienceController::class);
+Route::resource('educational-experiences.groups', GroupController::class)->shallow();
 Route::resource('enrollments', EnrollmentController::class);
 

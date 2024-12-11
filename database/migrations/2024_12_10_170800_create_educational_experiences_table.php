@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nrc', 5);
             $table->string('name', 60);
             $table->string('modality', 45);
+            $table->unsignedInteger('educative_program');
             $table->string('description', 255)->nullable();
             $table->timestamps();
             $table->softDeletes();

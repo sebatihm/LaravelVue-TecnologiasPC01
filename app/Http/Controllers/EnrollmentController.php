@@ -12,10 +12,8 @@ class EnrollmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($studentId)
     {
-        $enrollment = Enrollment::all();
-        return response()->json($enrollment, 201);
     }
 
     /**
@@ -23,12 +21,16 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        $groups = Group::all();
-        $students = User::where('role_id', 3)->get();
+        $student = User::findOrFail($studentId);
+
+        $studentProgram = $student->educative_program_id;
+
+        $educationalExperiences = EducationalExperience::where('educative_program', $studentProgram)->pluck('id');
+
+        $groups = Group::whereIn('educational_experience_id', $educationalExperiences)->get();
 
         return response()->json([
             'groups' => $groups,
-            'students' => $students
         ],201);
     }
 
@@ -117,5 +119,13 @@ class EnrollmentController extends Controller
         return response()->json([
             'message' => "El alumno ha sido dado de baja del grupo exitosamente."
         ]);
+    }
+
+    public function groupsByStudent($studentId)
+    {
+        $enrollments = Enrollment::where('student_id', $studentId)->pluck('group_id');
+        $groups = Group::whereIn('id', $enrollments);
+
+        return response()->json($groups, 201);
     }
 }

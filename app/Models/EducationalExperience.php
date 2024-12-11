@@ -12,6 +12,15 @@ class EducationalExperience extends Model
     use SoftDeletes;
     public $timestamps = true;
     protected $table = 'educational_experiences';
-    protected $fillable = ['nrc', 'name', 'modality', 'description', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by'];
+    protected $fillable = ['nrc', 'name', 'modality', 'educative_program','description', 'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by'];
+
+    public static $educativeProgram = [
+        1 => 'INGENIERIA DE SOFTWARE',
+        2 => 'ADMINISTRACION',
+        3 => 'GESRTION Y DIRECCION DE NEGOCIOS',
+        4 => 'CONTABLIDAD',
+        5 => 'INGENIERIA QUIMICA',
+        6 => 'INGENIERIA ELECTRICA'
+    ];
 
 }
