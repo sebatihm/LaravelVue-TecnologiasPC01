@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('educational_experience_id')->constrained('educational_experiences')->onDelete('no action')->onUpdate('no action');
             $table->foreignId('teacher_id')->constrained('users')->onDelete('no action')->onUpdate('no action');
+            $table->string('name', 45);
             $table->string('shift', 12);
             $table->string('period', 45);
             $table->timestamps();

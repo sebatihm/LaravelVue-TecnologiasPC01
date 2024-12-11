@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('users')->onDelete('no action')->onUpdate('no action');
             $table->foreignId('group_id')->constrained('groups')->onDelete('no action')->onUpdate('no action');
             $table->string('student_grade', 45)->nullable();
-            $table->timestamps();
         });
     }
 
