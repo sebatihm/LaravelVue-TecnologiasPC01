@@ -117,6 +117,24 @@ class UserController extends Controller
         ], 201);
     }
 
+    public function getStudents(){
+        $students = User::where('role_id', 3)->get();
+
+        return response()->json([
+            'message' => 'Se han consultado todos los maestros',
+            'data' => $students,
+        ],201);
+    }
+
+    public function getTeachers(){
+        $teachers = User::where('role_id',2)->get();
+
+        return response()->json([
+            'message' => 'Se han consultado todos los maestros',
+            'data' => $teachers,
+        ],201);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

@@ -27,3 +27,5 @@ Route::resource('educational-experience', EducationalExperienceController::class
 Route::resource('groups', GroupController::class);
 Route::resource('enrollments', EnrollmentController::class);
 
+Route::get('users-students', [UserController::class, 'getStudents'])->name('users.students');
+Route::get('users-teachers', [UserController::class, 'getTeachers'])->name('users.teachers');
