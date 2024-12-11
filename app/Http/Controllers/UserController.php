@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\DB;
+
+
 class UserController extends Controller
 {
     /**
@@ -140,6 +143,18 @@ class UserController extends Controller
         $request->validate([
             'group' => 'required|numeric'
         ]);
+
+        $students = DB::table('users')
+                    ->join('enrollments', 'users.id', '=' , 'enrollments.student_id')
+                    ->where('enrollments.group_id', $request->group)
+                    ->select('users.*','enrollments.student_grade')
+                    ->get();
+        
+        return response()->json([
+            'message' => 'Alumnos de un grupo en especifico',
+            'data' => $students
+        ],201);
+
 
         
 

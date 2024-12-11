@@ -7,6 +7,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\DB;
+
+
 class GroupController extends Controller
 {
     /**
@@ -106,6 +109,25 @@ class GroupController extends Controller
         ],201);
     }
 
+    public function getGroupDetailedInfo(Request $request)
+    {
+        $request->validate([
+            'group_id' => 'required|numeric'
+        ]);
+
+
+        $group = DB::table('groups')
+                    ->join('educational_experiences', 'groups.educational_experiences_id','=','educational_experiences.id')
+                    ->join('users','groups.teacher_id', '=' , 'users.id')
+                    ->where('groups.id',$request->group_id)
+                    ->select('users.name as teacher_name','users.last_name as teacher_last_name','users.mother_last_name as teacher_mother_last_name','groups.name','groups.shift','groups.period','educational_experiences.name as ee_name','educational_experiences.nrc','educational_experiences.modality')
+                    ->get();
+
+        return response()->json([
+            'message' => 'Se ha editado el grupo con exito.',
+            'data' => $group
+        ],201);
+    } 
     /**
      * Remove the specified resource from storage.
      */

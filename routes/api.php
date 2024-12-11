@@ -29,3 +29,5 @@ Route::resource('enrollments', EnrollmentController::class);
 
 Route::get('users-students', [UserController::class, 'getStudents'])->name('users.students');
 Route::get('users-teachers', [UserController::class, 'getTeachers'])->name('users.teachers');
+Route::get('users-students-group', [UserController::class, 'getStudentsByGroup'])->name('users.studentsByGroup');
+Route::get('groups-detailed', [GroupController::class, 'getGroupDetailedInfo'])->name('group.detailed');
