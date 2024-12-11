@@ -49,7 +49,13 @@ const logout = () => {
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    Inicio
+                                </NavLink>
+                                <NavLink :href="route('dashboard')" :active="route().current('educational-experiences')">
+                                    Experiencias educativas
+                                </NavLink>
+                                <NavLink :href="route('dashboard')" :active="route().current('groups')">
+                                    Grupos
                                 </NavLink>
                             </div>
                         </div>
