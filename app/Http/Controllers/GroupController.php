@@ -6,6 +6,7 @@ use App\Models\Group;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class GroupController extends Controller
 {
@@ -62,7 +63,12 @@ class GroupController extends Controller
     public function show($groupId)
     {
         $group = Group::findOrFail($groupId);
-        return response()->json($group, 201);
+
+        return Inertia::render('Groups/ShowGroup', [
+            'group' => $group,
+            'educationalExperience' => $group->educationalExperience ?? null,
+            'teacher' => $group->teacher ?? null,
+        ]);
     }
 
     /**

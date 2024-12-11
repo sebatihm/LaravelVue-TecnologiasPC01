@@ -54,9 +54,6 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('educational-experiences')">
                                     Experiencias educativas
                                 </NavLink>
-                                <NavLink :href="route('dashboard')" :active="route().current('groups')">
-                                    Grupos
-                                </NavLink>
                             </div>
                         </div>
 
