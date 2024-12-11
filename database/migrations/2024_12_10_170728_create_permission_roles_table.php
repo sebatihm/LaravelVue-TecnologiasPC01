@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->constrained('roles')->onDelete('no action')->onUpdate('no action');
             $table->foreignId('permission_id')->constrained('permissions')->onDelete('no action')->onUpdate('no action');
-            $table->timestamps();
         });
     }
 

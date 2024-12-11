@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -17,6 +18,9 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use SoftDeletes;
+
+    public $timestamps = true;
 
     /**
      * The attributes that are mass assignable.
@@ -24,9 +28,20 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'role_id',
+        'tuition',
         'name',
+        'last_name',
+        'mother_last_name',
         'email',
         'password',
+        'university_career',
+        'profile_photo_path',
+        'created_at',
+        'updated_at',
+        'created_by',
+        'updated_by',
+        'deleted_by'
     ];
 
     /**
