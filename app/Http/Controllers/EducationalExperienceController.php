@@ -23,7 +23,8 @@ class EducationalExperienceController extends Controller
      */
     public function create()
     {
-        //
+        $educativeProgram = EducationalExperience::$educativeProgram;
+        return response()->json($educativeProgram, 201);
     }
 
     /**
@@ -35,6 +36,7 @@ class EducationalExperienceController extends Controller
             'nrc' => 'required|string|max:5',
             'name' => 'required|string',
             'modality' => 'required|string',
+            'educativeProgram' => 'required|numeric',
             'description' => 'nullable|string'
         ]);
 
@@ -42,6 +44,7 @@ class EducationalExperienceController extends Controller
             'nrc' => $request->nrc,
             'name' => $request->name,
             'modality' => $request->modality,
+            'educative_program' => $request->educativeProgram,
             'description' => $request->description,
             'created_by' => Auth::id(),
             'updated_by' => Auth::id(),
@@ -67,9 +70,10 @@ class EducationalExperienceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( $educationalExperienceId)
     {
-        //
+        $educationalExperience = EducationalExperience::findOrFail($educationalExperienceId);
+        return response()->json($educationalExperience, 200);
     }
 
     /**

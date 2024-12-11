@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EducationalExperience;
 use App\Models\Group;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,18 +13,20 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($educationalExperience)
     {
-        $groups = Group::all();
-        return response()->json($groups, 200);
+
+        $groups = Group::where('educational_experience_id', $educationalExperience)->get();
+        return response()->json($groups, 201);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($educationalExperience)
     {
-        //
+        $educationalExperience = EducationalExperience::findOrFail($educationalExperience);
+        return response()->json($educationalExperience, 201);
     }
 
     /**
@@ -116,10 +119,14 @@ class GroupController extends Controller
         $group->save();
         $group->delete();
 
-
-
         return response()->json([
             'message' => 'Se ha eliminado el grupo correctamente.'
         ],201);
+    }
+
+    public function teacherGroups($teacherId)
+    {
+        $groups = Group::where('teacher_id', $teacherId);
+        return response()->json($groups, 201);
     }
 }
