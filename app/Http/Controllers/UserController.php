@@ -135,6 +135,17 @@ class UserController extends Controller
         ],201);
     }
 
+
+    public function getStudentsByGroup(Request $request){
+        $request->validate([
+            'group' => 'required|numeric'
+        ]);
+
+        
+
+
+    }
+
     /**
      * Remove the specified resource from storage.
      */

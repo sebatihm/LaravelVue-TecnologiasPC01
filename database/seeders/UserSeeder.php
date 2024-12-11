@@ -136,6 +136,17 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 'university_career'=> null
             ],
+            [
+                'id' => 12,
+                'role_id' => 3,
+                'tuition' => 's22017010',
+                'name' => 'RICARDO',
+                'last_name' => 'LANDA',
+                'mother_last_name' => 'SOLANO',
+                'email' => 'mediocrSS@gmail.com',
+                'password' => Hash::make('12345678'),
+                'university_career'=> null
+            ],
 
             
         ]);
