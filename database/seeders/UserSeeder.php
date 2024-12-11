@@ -524,7 +524,7 @@ class UserSeeder extends Seeder
                 [
                     'id' => 47,
                     'role_id' => 3,
-                    'tuition' => 's22017045',
+                    'tuition' => 's22017064',
                     'name' => 'JORGE',
                     'last_name' => 'BARLAU',
                     'mother_last_name' => 'BOTE',
