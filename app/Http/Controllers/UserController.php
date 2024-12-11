@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use http\Env\Response;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -30,15 +32,44 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'roleId' => 'required|numeric',
+            'tuition' => 'required|max:12',
+            'name' => 'required|string|max:45',
+            'lastName'=> 'required|string|max:45',
+            'motherLastName' => 'required|string|max:45',
+            'email' => 'required|email|string|max:255',
+            'password'=> 'required|string|max:255',
+            'universityCareer' => 'nullable|string',
+        ]);
+
+        $user = User::create([
+            'role_id' => $request->roleId,
+            'tuition'=>$request->tuition,
+            'name'=>$request->name,
+            'last_name'=>$request->lastName,
+            'mother_last_name'=>$request->motherLastName,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'university_career'=>$request->universityCareer,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+            'created_by' => Auth::id()
+        ]);
+
+        return response()->json([
+            'message' => 'Usuario dado de alta de alta exitosamente',
+            'data' => $user,
+        ], 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show( $userId)
     {
-        //
+        $user = User::findOrFail($userId);
+        return response()->json($user, 201);
     }
 
     /**
@@ -52,16 +83,53 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $userId)
     {
-        //
+        $user = User::findOrFail($userId);
+
+        $request->validate([
+            'roleId' => 'required|numeric',
+            'tuition' => 'required|max:12',
+            'name' => 'required|string|max:45',
+            'lastName'=> 'required|string|max:45',
+            'motherLastName' => 'required|string|max:45',
+            'email' => 'required|email|string|max:255',
+            'password'=> 'required|string|max:255',
+            'universityCareer' => 'nullable|string',
+        ]);
+
+        $user->update([
+            'role_id' => $request->roleId,
+            'tuition'=>$request->tuition,
+            'name'=>$request->name,
+            'last_name'=>$request->lastName,
+            'mother_last_name'=>$request->motherLastName,
+            'email'=>$request->email,
+            'password'=>Hash::make($request->password),
+            'university_career'=>$request->universityCareer,
+            'updated_at' => Carbon::now(),
+            'updated_by' => Auth::id()
+        ]);
+
+        return response()->json([
+            'message' => 'Usuario editado exitosamente.',
+            'user' => $user
+        ], 201);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($userId)
     {
-        //
+        $user = User::findOrFail($userId);
+
+        $user->deleted_by = Auth::id();
+        $user->save();
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Se ha eliminado el usuario.'
+        ], 201);
     }
 }
