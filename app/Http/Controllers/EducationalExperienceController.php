@@ -15,7 +15,11 @@ class EducationalExperienceController extends Controller
     public function index()
     {
         $educationalExperiences = EducationalExperience::all();
-        return response()->json($educationalExperiences, 200);
+        $educativePrograms = EducationalExperience::$educativeProgram;
+        return response()->json([
+            'educationalExperiences' => $educationalExperiences,
+            'educativePrograms' => $educativePrograms,
+        ], 200);
     }
 
     /**

@@ -7,13 +7,10 @@ export default {
     components: {PrimaryButton, SectionTitle},
     data() {
         return {
-            groups: [],
             educationalExperiences: [],
             users: [],
-            loading: false,
             loadingEE: false,
             loadingUsers: false,
-            error: null,
             errorEE: null,
             errorUser: null,
         };
@@ -24,12 +21,10 @@ export default {
     // El hook mounted se ejecuta después de que el componente se monta en el DOM
     mounted() {
         axios.defaults.withCredentials = true;
-        this.fetchGroups();
-        this.fetchUsers();
         this.fetchEducationalExperience();
     },
     methods: {
-        async fetchGroups() {
+       /* async fetchGroups() {
             this.loading = true;
             this.error = null;
 
@@ -43,17 +38,14 @@ export default {
             } finally {
                 this.loading = false;
             }
-        },
+        },*/
         async fetchEducationalExperience() {
             this.loadingEE = true;
             this.errorEE = null;
 
             try {
-                const response = await axios.get(`/api/educational-experience`);
-                this.educationalExperiences = response.data.reduce((acc, exp) => {
-                    acc[exp.id] = exp;
-                    return acc;
-                }, {});
+                const response = await axios.get(`/api/educational-experiences`);
+                this.educationalExperiences = response.data;
             } catch (error) {
                 this.errorEE = error.response?.data?.message ||
                     'No se pudieron cargar los experiencias educativas';
@@ -62,7 +54,7 @@ export default {
                 this.loadingEE = false;
             }
         },
-        async fetchUsers() {
+        /*async fetchUsers() {
             this.loadingUsers = true;
             this.errorUser = null;
 
@@ -80,7 +72,7 @@ export default {
             } finally {
                 this.loadingUsers = false;
             }
-        }
+        }*/
 
     }
 }
@@ -90,17 +82,17 @@ export default {
     <div>
         <div class="p-6 lg:p-8 bg-white border-b border-gray-200 flex justify-between">
             <h1 class="text-2xl font-medium text-gray-900">
-                Grupos
+                Experiencias educativas
             </h1>
-            <a :href="route('groups.create')">
+<!--            <a :href="route('groups.create')">
                 <PrimaryButton type="button">Crear grupo</PrimaryButton>
-            </a>
+            </a>-->
         </div>
 
         <div class="bg-gray-200 bg-opacity-25 p-6 lg:p-8">
-            <div v-if="loading" class="text-center">
+<!--            <div v-if="loading" class="text-center">
                 Cargando grupos...
-            </div>
+            </div>-->
 
             <div v-if="loadingEE" class="text-center">
                 Buscando experiencia educativa...
@@ -110,39 +102,29 @@ export default {
                 Buscando usuarios...
             </div>
 
-            <!-- Mostrar mensaje de error si existe -->
-            <div v-else-if="error" class="text-red-600">
-                {{ error }}
+            <div v-else-if="errorEE" class="text-red-600">
+                {{ errorEE }}
             </div>
 
-            <!-- Mostrar mensaje si no hay cursos -->
-            <div v-else-if="groups.length === 0" class="text-center">
-                No hay grupos disponibles.
-            </div>
 
             <!-- Mostrar los cursos -->
             <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <a
-                        v-for="group in groups"
-                        :key="group.id"
-                        :href="route('groups.show', { group: group.id })"
+                        v-for="educationalExperience in educationalExperiences.educationalExperiences"
+                        :key="educationalExperience.id"
+                        :href="route('groups.list', { 'educational-experience': educationalExperience.id })"
                         class="bg-white p-6 rounded-lg shadow-md hover:bg-gray-100 transition"
                     >
                         <section-title>
                             <!-- Slot para el título -->
                             <template #title>
-                                {{ educationalExperiences[group.educational_experience_id]?.name || 'Sin experiencia educativa' }}
+                                {{ educationalExperience.name || 'Sin experiencia educativa' }}
                             </template>
 
                             <!-- Slot para la descripción -->
                             <template #description>
-                                <strong>Turno:</strong> {{ group.shift }} <br>
-                                <strong>Periodo:</strong> {{ group.period }}
-                            </template>
-
-                            <!-- Slot para el contenido adicional (aside) -->
-                            <template #aside>
-                                <strong>Docente:</strong> {{ users[group.teacher_id]?.name.concat(" ", users[group.teacher_id]?.last_name, " ", users[group.teacher_id]?.mother_last_name) || 'No asignado' }}
+                                <strong>NRC:</strong> {{ educationalExperience.nrc }} <br>
+                                <strong>Modalidad:</strong> {{ educationalExperience.modality }}
                             </template>
                         </section-title>
                     </a>

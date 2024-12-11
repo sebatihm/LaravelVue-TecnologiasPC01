@@ -34,6 +34,10 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    Route::get('/educational-experience/{educationalExperience}/groups', function () {
+        return Inertia::render('Groups/GroupsIndex');
+    })->name('groups.list');
+
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
 
 });
