@@ -112,7 +112,7 @@ export default {
                     <a
                         v-for="educationalExperience in educationalExperiences.educationalExperiences"
                         :key="educationalExperience.id"
-                        :href="route('groups.list', { 'educational-experience': educationalExperience.id })"
+                        :href="route('groups.list', { 'educationalExperience': educationalExperience.id })"
                         class="bg-white p-6 rounded-lg shadow-md hover:bg-gray-100 transition"
                     >
                         <section-title>

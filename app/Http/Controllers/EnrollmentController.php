@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EducationalExperience;
 use App\Models\Enrollment;
 use App\Models\Group;
 use App\Models\User;
@@ -19,7 +20,7 @@ class EnrollmentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($studentId)
     {
         $student = User::findOrFail($studentId);
 

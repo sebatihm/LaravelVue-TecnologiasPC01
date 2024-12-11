@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\GroupController;
+use App\Models\EducationalExperience;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -34,8 +36,11 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/educational-experience/{educationalExperience}/groups', function () {
-        return Inertia::render('Groups/GroupsIndex');
+    Route::get('/educational-experience/{educationalExperience}/groups', function (Request $request, $educationalExperience) {
+
+        return Inertia::render('Groups/GroupsIndex', [
+            'educationalExperience' => EducationalExperience::find($educationalExperience),
+        ]);
     })->name('groups.list');
 
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');

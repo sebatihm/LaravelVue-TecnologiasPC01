@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EducationalExperience;
 use App\Models\Group;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +68,7 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($groupId);
 
-        return Inertia::render('Groups/ShowGroup', [
+        return Inertia::render('Groups/GroupShow', [
             'group' => $group,
             'educationalExperience' => $group->educationalExperience ?? null,
             'teacher' => $group->teacher ?? null,
@@ -134,5 +135,14 @@ class GroupController extends Controller
     {
         $groups = Group::where('teacher_id', $teacherId);
         return response()->json($groups, 201);
+    }
+
+    public function studentsByGroup($groupId){
+        $students = User::join('enrollments', 'users.id', '=', 'enrollments.student_id')
+            ->where('enrollments.group_id', $groupId)
+            ->select('users.*')->get();
+
+        return response()->json($students, 201);
+
     }
 }

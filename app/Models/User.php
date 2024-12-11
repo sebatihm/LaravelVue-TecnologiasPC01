@@ -74,4 +74,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function enrollment(){
+        return $this->BelongsTo(Enrollment::class, 'id', 'student_id');
+    }
+
 }
