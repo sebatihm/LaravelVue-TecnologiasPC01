@@ -55,7 +55,7 @@ Route::middleware([
         return Inertia::render('EducationalExperience/EducationalExperienceDelete');
     })->name('educational-experience.delete');
 
-    Route::get('/group/{group}', [GroupController::class, 'show'])->name('groups.show');
+    Route::get('/group/{group}', [GroupController::class, 'show'])->name('groups.sho');
 
     Route::get('/educational-experiences/{educational_experience}/groups/create', function ($educationalExperience) {
         $educationalExperience = EducationalExperience::findOrFail($educationalExperience);
