@@ -10,8 +10,19 @@ use Illuminate\Support\Facades\Auth;
 class EducationalExperienceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * @OA\Get(
+    *     path="/api/educational_experiences",
+    *     summary="Mostrar usuarios",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los usuarios."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index()
     {
         $educationalExperiences = EducationalExperience::all();

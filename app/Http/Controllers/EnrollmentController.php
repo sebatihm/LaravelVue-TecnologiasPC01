@@ -7,11 +7,23 @@ use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class EnrollmentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * @OA\Get(
+    *     path="/api/enrollments",
+    *     summary="Mostrar usuarios",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los usuarios."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index()
     {
         $enrollment = Enrollment::all();

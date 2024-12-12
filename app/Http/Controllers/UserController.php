@@ -10,12 +10,27 @@ use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\DB;
 
-
+/**
+* @OA\Info(title="API Eplus v 0.0.1", version="1.0")
+*
+* @OA\Server(url="http://127.0.0.1:8000")
+*/
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * @OA\Get(
+    *     path="/api/users",
+    *     summary="Mostrar usuarios",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los usuarios."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index()
     {
         $users = User::all();
@@ -83,9 +98,7 @@ class UserController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, $userId)
     {
         $user = User::findOrFail($userId);
@@ -120,6 +133,20 @@ class UserController extends Controller
         ], 201);
     }
 
+    /**
+    * @OA\Get(
+    *     path="/api/users-students",
+    *     summary="Mostrar todos los estudiantes",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los estudiantes."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function getStudents(){
         $students = User::where('role_id', 3)->get();
 
@@ -129,6 +156,20 @@ class UserController extends Controller
         ],201);
     }
 
+    /**
+    * @OA\Get(
+    *     path="/api/users-teachers",
+    *     summary="Mostrar todos los maestros",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los maestros."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function getTeachers(){
         $teachers = User::where('role_id',2)->get();
 
@@ -139,6 +180,20 @@ class UserController extends Controller
     }
 
 
+    /**
+    * @OA\Get(
+    *     path="/api/users-students-group",
+    *     summary="Mostrar todos los estudiantes de un grupo",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los estudiantes pertenecientes a un grupo."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function getStudentsByGroup(Request $request){
         $request->validate([
             'group' => 'required|numeric'

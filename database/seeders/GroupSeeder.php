@@ -31,6 +31,38 @@ class GroupSeeder extends Seeder
                 , 'shift' => 'Matutino'
                 , 'period' => '2024-2025'
             ],
+            [
+                'id' => 3
+                , 'educational_experience_id' => 7
+                ,'teacher_id' => 5
+                , 'name' => 'BASE DE DATOS 2023'
+                , 'shift' => 'Vespertino'
+                , 'period' => '2023-2024'
+            ],
+            [
+                'id' => 4
+                , 'educational_experience_id' => 10
+                ,'teacher_id' => 5
+                , 'name' => 'Principios Diseño 2024'
+                , 'shift' => 'Vespertino'
+                , 'period' => '2023-2024'
+            ],
+            [
+                'id' => 5
+                , 'educational_experience_id' => 6
+                ,'teacher_id' => 6
+                , 'name' => 'PDS 2024'
+                , 'shift' => 'Vespertino'
+                , 'period' => '2024-2025'
+            ],
+            [
+                'id' => 6
+                , 'educational_experience_id' => 1
+                ,'teacher_id' => 7
+                , 'name' => 'REDES 2024'
+                , 'shift' => 'Matutino'
+                , 'period' => '2023-2024'
+            ],
         ]);
     }
 }

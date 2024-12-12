@@ -1,0 +1,138 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Eplus v 0.0.1",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:8000"
+        }
+    ],
+    "paths": {
+        "/api/educational_experiences": {
+            "get": {
+                "summary": "Mostrar usuarios",
+                "operationId": "f7ef7063fd745e40ab8911ce8148474a",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/enrollments": {
+            "get": {
+                "summary": "Mostrar usuarios",
+                "operationId": "e10c9170029fc2712ce897b551063cbf",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/groups": {
+            "get": {
+                "summary": "Mostrar grupos",
+                "operationId": "f286cbf34dc4be32a94459a335658168",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los grupos."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/groups-detailed": {
+            "get": {
+                "summary": "Mostrar un grupo detalladamente",
+                "operationId": "36ea62ca33ed998e8383c78b95f027ca",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar la informacion completa de un grupo en especifico.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "group_id": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "get": {
+                "summary": "Mostrar usuarios",
+                "operationId": "c457726701591d1183b53aa71fc13441",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los usuarios."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users-students": {
+            "get": {
+                "summary": "Mostrar todos los estudiantes",
+                "operationId": "25429b2233b17b63d5e160258832b99b",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los estudiantes."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users-teachers": {
+            "get": {
+                "summary": "Mostrar todos los maestros",
+                "operationId": "fe7a6b52b52bb67db8933a768cd22db0",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los maestros."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        },
+        "/api/users-students-group": {
+            "get": {
+                "summary": "Mostrar todos los estudiantes de un grupo",
+                "operationId": "b2499564dc1e4333dc1a1401eb9836b9",
+                "responses": {
+                    "200": {
+                        "description": "Mostrar todos los estudiantes pertenecientes a un grupo."
+                    },
+                    "default": {
+                        "description": "Ha ocurrido un error."
+                    }
+                }
+            }
+        }
+    }
+}

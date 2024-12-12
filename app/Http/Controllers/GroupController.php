@@ -13,8 +13,19 @@ use Illuminate\Support\Facades\DB;
 class GroupController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
+    * @OA\Get(
+    *     path="/api/groups",
+    *     summary="Mostrar grupos",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar todos los grupos."
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function index()
     {
         $groups = Group::all();
@@ -109,6 +120,23 @@ class GroupController extends Controller
         ],201);
     }
 
+    /**
+    * @OA\Get(
+    *     path="/api/groups-detailed",
+    *     summary="Mostrar un grupo detalladamente",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Mostrar la informacion completa de un grupo en especifico.",
+    *         @OA\JsonContent(
+    *             @OA\Property(property="group_id", type="integer")
+    *        )
+    *     ),
+    *     @OA\Response(
+    *         response="default",
+    *         description="Ha ocurrido un error."
+    *     )
+    * )
+    */
     public function getGroupDetailedInfo(Request $request)
     {
         $request->validate([
