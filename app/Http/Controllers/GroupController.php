@@ -34,11 +34,9 @@ class GroupController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, $teacherId)
     {
         $request->validate([
-            'educationalExperienceId' => 'required|numeric',
-            'teacherId' => 'required|numeric',
             'name' => 'required|string|max:45',
             'shift' => 'required|string|max:12',
             'period' => 'required|string|max:45'
@@ -46,13 +44,13 @@ class GroupController extends Controller
 
         $group = Group::create([
             'educational_experience_id' => $request->educationalExperienceId,
-            'teacher_id' => $request->teacherId,
+            'teacher_id' => $teacherId,
             'name' => $request->name,
             'shift' => $request->shift,
             'period' => $request->period,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
-            'created_by' => Auth::id()
+            'created_by' => $teacherId
         ]);
 
         return response()->json([

@@ -44,7 +44,7 @@ class EducationalExperienceController extends Controller
             'description' => 'nullable|string'
         ]);
 
-        $educationalExperience = EducationalExperience::create([
+        EducationalExperience::create([
             'nrc' => $request->nrc,
             'name' => $request->name,
             'modality' => $request->modality,
@@ -56,7 +56,6 @@ class EducationalExperienceController extends Controller
 
         return response()->json([
             'message' => "Experiencia educativa creada exitosamente",
-            'data' => $educationalExperience,
         ], 201);
     }
 

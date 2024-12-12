@@ -42,8 +42,21 @@ Route::middleware([
             'educationalExperience' => EducationalExperience::find($educationalExperience),
         ]);
     })->name('groups.list');
+    
+    Route::get('/educational-experience/create', function () {
+        return Inertia::render('EducationalExperience/EducationalExperienceCreate');
+    })->name('educational-experience.create');
+
+    Route::get(' /educational-experiences/{educationalExperience}/edit', function () {
+        return Inertia::render('EducationalExperience/EducationalExperienceEdit');
+    })->name('educational-experience.edit');
 
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
+
+    Route::get('/educational-experiences/{educational_experience}/groups/create', function ($educationalExperience) {
+        $educationalExperience = EducationalExperience::findOrFail($educationalExperience);
+        return Inertia::render('Groups/GroupCreate', ['educational_experience' => $educationalExperience]);
+    })->name('group.create');
 
 });
     Route::get('/home', function () {
