@@ -22,8 +22,8 @@ const educationalPrograms = [
 ];
 
 const modalities = [
-    { value: '1', label: 'Presencial' },
-    { value: '2', label: 'En línea' },
+    { value: 'ESCOLARIZADO', label: 'ESCOLARIZADO' },
+    { value: 'VIRTUAL', label: 'VIRTUAL' },
 ];
 
 // Función para enviar el formulario

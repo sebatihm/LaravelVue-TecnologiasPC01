@@ -37,19 +37,23 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/educational-experience/{educationalExperience}/groups', function (Request $request, $educationalExperience) {
-
         return Inertia::render('Groups/GroupsIndex', [
             'educationalExperience' => EducationalExperience::find($educationalExperience),
         ]);
     })->name('groups.list');
-    
+
     Route::get('/educational-experience/create', function () {
         return Inertia::render('EducationalExperience/EducationalExperienceCreate');
     })->name('educational-experience.create');
 
-    Route::get(' /educational-experiences/{educationalExperience}/edit', function () {
-        return Inertia::render('EducationalExperience/EducationalExperienceEdit');
+    Route::get('/educational-experiences/{educationalExperience}/edit', function ($educationalExperience) {
+        $educationalExperience = EducationalExperience::findOrFail($educationalExperience);
+        return Inertia::render('EducationalExperience/EducationalExperienceEdit', ['educationalExperience' => $educationalExperience]);
     })->name('educational-experience.edit');
+
+    Route::get('/educational-experiences/{educationalExperience}/delete', function () {
+        return Inertia::render('EducationalExperience/EducationalExperienceDelete');
+    })->name('educational-experience.delete');
 
     Route::get('/groups/{group}', [GroupController::class, 'show'])->name('groups.show');
 

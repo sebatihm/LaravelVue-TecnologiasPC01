@@ -18,39 +18,18 @@ export default {
     return {
       loading: false,
       error: null,
-    //   educationalExperience: null, // Initialize the educationalExperience property
     };
   },
   props: {
     auth: Object,
     educational_experience: Object, // Expect the educationalExperience to be passed as a prop
   },
-  mounted() {
-    // this.fetchEducationalExperience(this.educationalExperience.id); // Fetch the educational experience data when the component is created
-  },
-  methods: {
-//     async fetchEducationalExperience(educationalExperience) {
-//       this.loading = true;
-//       this.error = null;
-
-//       try {
-//         const response = await axios.get(`/api/educational-experiences/${educationalExperience}/groups/create`);
-//         this.educationalExperience = response.data; // Assign the response data to the component's educationalExperience property
-//       } catch (error) {
-//         this.error = error.response?.data?.message || 'No se pudieron cargar los experiencias educativas';
-//         console.error('Error al cargar los experiencias educativas:', error);
-//       } finally {
-//         this.loading = false;
-//       }
-//     },
-    },
   setup(props) {
-    console.log(props)
     const form = useForm({
-        educationalExperienceId: props.educational_experience.id, // Initialize the educational_experience_id to null
-      name: '',
-      shift: '',
-      period: '',
+        educationalExperienceId: props.educational_experience.id,
+        name: '',
+        shift: '',
+        period: '',
     });
 
     const shifts = [
@@ -59,10 +38,10 @@ export default {
     ];
 
     const submit = () => {
-  form.post(route('educational-experiences.groups.store', { educational_experience: props.educational_experience }), {
-    onFinish: () => form.reset(), // Reset the form after submission
-  });
-};
+        form.post(route('educational-experiences.groups.store', { educational_experience: props.educational_experience }), {
+            onFinish: () => form.reset(),
+        });
+    };
 
     return {
       form,
