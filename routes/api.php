@@ -25,6 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('users', UserController::class);
 Route::resource('educational-experiences', EducationalExperienceController::class);
 Route::resource('educational-experiences.groups', GroupController::class)->shallow();
-Route::get('groups/{group}/students', [GroupController::class, 'studentsByGroup'])->name('groups.studentsByGroup')->except('show');
+Route::get('groups/{group}/students', [GroupController::class, 'studentsByGroup'])->name('groups.studentsByGroup');
 Route::resource('enrollments', EnrollmentController::class);
 
